@@ -7,18 +7,18 @@ import { ATTRIBUTE } from './index';
 import { ConvertFullHalfCommand } from './command';
 
 export class ConvertFullHalfEditing extends Plugin {
-	/**
+  /**
 	 * @inheritDoc
 	 */
-	static get pluginName() {
-		return 'ConvertFullHalfEditing';
-	}
+  static get pluginName() {
+    return 'ConvertFullHalfEditing';
+  }
 
-	/**
+  /**
 	 * @inheritDoc
 	 */
-	init() {
-		const editor = this.editor;
-		editor.commands.add(ATTRIBUTE, new ConvertFullHalfCommand(editor));
-	}
+  init() {
+    const editor = this.editor;
+    editor.commands.add(ATTRIBUTE, new ConvertFullHalfCommand(editor));
+  }
 }

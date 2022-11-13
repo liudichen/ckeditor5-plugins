@@ -8,20 +8,21 @@ import { ConvertFullHalfEditing } from './editing';
 
 const ATTRIBUTE = 'convertFullHalf';
 
-class ConvertFullHalf extends Plugin {
-	/**
+/** 标点符号的全角和半角（中/英文）转换 Plugin:ConvertFullHalf, toolbar:convertFullHalf */
+export default class ConvertFullHalf extends Plugin {
+  /**
 	 * @inheritDoc
 	 */
-	static get requires() {
-		return [ConvertFullHalfUI, ConvertFullHalfEditing];
-	}
+  static get requires() {
+    return [ ConvertFullHalfUI, ConvertFullHalfEditing ];
+  }
 
-	/**
+  /**
 	 * @inheritDoc
 	 */
-	static get pluginName() {
-		return 'ConvertFullHalf';
-	}
+  static get pluginName() {
+    return 'ConvertFullHalf';
+  }
 }
 
 export { ATTRIBUTE, ConvertFullHalfUI, ConvertFullHalfEditing, ConvertFullHalf };
