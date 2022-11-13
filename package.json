@@ -43,6 +43,9 @@
     "node": ">=8.0.0",
     "npm": ">=5.7.1"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "src",
     "theme",
