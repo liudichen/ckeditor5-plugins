@@ -51,6 +51,7 @@ import DecoupledEditorBase from '@ckeditor/ckeditor5-editor-decoupled/src/decoup
 
 // Official plugin packages from Ckeditor
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
+import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 // ...
 
 // Custom plug-in packages
@@ -62,7 +63,6 @@ import ClearSpaceCharacter from '@iimm/ckeditor5-plugins/src/clear-space-charact
 import SoftBreakToEnter from '@iimm/ckeditor5-plugins/src/soft-break-to-enter';
 import QuickStyle from '@iimm/ckeditor5-plugins/src/quick-style';
 import ConvertFullHalf from '@iimm/ckeditor5-plugins/src/convert-full-half';
-import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import SimpleAdapter from '@iimm/ckeditor5-plugins/src/simple-adapter';
 import Outline from '@iimm/ckeditor5-plugins/src/outline';
 import FormatPainter from '@iimm/ckeditor5-plugins/src/format-painter';
@@ -81,7 +81,9 @@ DecoupledEditor.builtinPlugins = [
   SoftBreakToEnter,
   QuickStyle,
   ConvertFullHalf,
-  Extensions,
+  SimpleAdapter,
+  Outline,
+  FormatPainter,
 ];
 
 DecoupledEditor.defaultConfig = {
