@@ -1,4 +1,4 @@
-export const EXCLIDEBLOCK = 'imageBlock';
+export const EXCLUDEBLOCK = 'imageBlock';
 
 /**
  * Find the first successful validation object 找到第1个满足条件的block对象

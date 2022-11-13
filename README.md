@@ -53,7 +53,7 @@ import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 // ...
 
 // Custom plug-in packages
-import IndentFirstLine from '@iimm/ckeditor5-plugins/src/indent-first';
+import IndentFirstLine from '@iimm/ckeditor5-plugins/src/indent-first-line';
 import ParagraphSpacing from '@iimm/ckeditor5-plugins/src/paragraph-style/paragraph-spacing';
 import LineHeight from '@iimm/ckeditor5-plugins/src/paragraph-style/line-height';
 import ClearEmptyParagraph from '@iimm/ckeditor5-plugins/src/clear-empty-paragraph';

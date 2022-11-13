@@ -3,7 +3,7 @@
  */
 import { Command } from '@ckeditor/ckeditor5-core';
 import { ATTRIBUTE } from './index';
-import { findFirst, EXCLIDEBLOCK } from '../utils';
+import { findFirst, EXCLUDEBLOCK } from '../utils';
 
 /**
  * The indent-first command plugin.
@@ -18,7 +18,7 @@ export class IndentFirstLineCommand extends Command {
     const first = findFirst(
       this.editor.model.document.selection.getSelectedBlocks(),
       (item) => !this._exclude(item),
-      EXCLIDEBLOCK
+      EXCLUDEBLOCK
     );
     this.isEnabled = !!first && this._executable(this.editor.model.schema, first);
 
