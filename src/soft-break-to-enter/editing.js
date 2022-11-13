@@ -6,18 +6,18 @@ import { SoftBreakToEnterCommand } from './command';
 import { ATTRIBUTE } from './index';
 
 export class SoftBreakToEnterEditing extends Plugin {
-	/**
+  /**
 	 * @inheritDoc
 	 */
-	static get pluginName() {
-		return 'SoftBreakToEnterEditing';
-	}
+  static get pluginName() {
+    return 'SoftBreakToEnterEditing';
+  }
 
-	/**
+  /**
 	 * @inheritDoc
 	 */
-	init() {
-		const editor = this.editor;
-		editor.commands.add(ATTRIBUTE, new SoftBreakToEnterCommand(editor));
-	}
+  init() {
+    const editor = this.editor;
+    editor.commands.add(ATTRIBUTE, new SoftBreakToEnterCommand(editor));
+  }
 }

@@ -8,20 +8,21 @@ import { SoftBreakToEnterEditing } from './editing';
 
 const ATTRIBUTE = 'softBreakToEnter';
 
-class SoftBreakToEnter extends Plugin {
-	/**
+/** 软换行转硬换行 Plugin:SoftBreakToEnter, toolbar:softBreakEnter */
+export default class SoftBreakToEnter extends Plugin {
+  /**
 	 * @inheritDoc
 	 */
-	static get requires() {
-		return [SoftBreakToEnterUI, SoftBreakToEnterEditing];
-	}
+  static get requires() {
+    return [ SoftBreakToEnterUI, SoftBreakToEnterEditing ];
+  }
 
-	/**
+  /**
 	 * @inheritDoc
 	 */
-	static get pluginName() {
-		return 'SoftBreakToEnter';
-	}
+  static get pluginName() {
+    return 'SoftBreakToEnter';
+  }
 }
 
 export { ATTRIBUTE, SoftBreakToEnterUI, SoftBreakToEnterEditing, SoftBreakToEnter };
