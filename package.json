@@ -21,7 +21,7 @@
   ],
   "author": "iimm",
   "license": "MIT",
-  "homepage": "https://github.com/letsbug/ckeditor5-plugins#readme",
+  "homepage": "https://github.com/liudichen/ckeditor5-plugins#readme",
   "peerDependencies": {
     "@ckeditor/ckeditor5-core": ">=32.0.0",
     "@ckeditor/ckeditor5-engine": ">=32.0.0",
