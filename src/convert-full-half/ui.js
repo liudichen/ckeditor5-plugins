@@ -43,7 +43,7 @@ export class ConvertFullHalfUI extends Plugin {
 
       button.bind('isEnabled').to(command);
       button.bind('icon').to(command, 'value', (val) => (val ? icons.get(val) : HalfIcon));
-      button.bind('label').to(command, 'value', (val) => (val ? labels.get(val) : '全角/半角转换'));
+      button.bind('label').to(command, 'value', (val) => (val ? labels.get(val) : '全角/半角标点转换'));
 
       this.listenTo(button, 'execute', () => {
         editor.execute(ATTRIBUTE);
