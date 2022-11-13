@@ -36,9 +36,10 @@
 ### installation
 
 ```bash
+# 最新的内容：
 npm i -S https://github.com/liudichen/ckeditor5-plugins.git
 
-# 后续可能上传到npmjs.com：
+# 发布到npmjs.com版本：
 npm i @iimm/ckeditor5-plugins
 ```
 
