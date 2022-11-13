@@ -21,7 +21,7 @@ export class OutlineUI extends Plugin {
       const view = new ButtonView(locale);
 
       view.set({
-        label: '轮廓线框',
+        label: '文本轮廓线框',
         icon: outlineIcon,
         keystroke: 'CTRL+SHIFT+O',
         tooltip: true,

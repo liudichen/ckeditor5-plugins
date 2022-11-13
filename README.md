@@ -18,7 +18,7 @@
 │   ├── figure-attributes       为figure包裹的元素添加自定义属性
 │   ├── format-painter          格式刷(将选择的区块的样式应用于其他区块)
 │   ├── indent-first-line       首行缩进
-│   ├── outline                 字符边框
+│   ├── outline                 文本轮廓线框
 │   ├── paragraph-style
 │       ├── line-height         行高(行距)控制
 │       ├── paragraph-spacing   段落间距(实际为段前距)
