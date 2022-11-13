@@ -1,3 +1,5 @@
+/* eslint-disable jsdoc/require-returns-description */
+/* eslint-disable jsdoc/check-tag-names */
 /**
  * @license Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
@@ -40,49 +42,49 @@ import { View, Template } from '@ckeditor/ckeditor5-ui';
  * 		<paragraph>12345</paragraph>
  * 		// Words: 1, Characters: 5
  *
- * @extends module:core/plugin~Plugin
+ * @augments module:core/plugin~Plugin
  */
-class Counter extends Plugin {
-	/**
+export default class Counter extends Plugin {
+  /**
 	 * @inheritDoc
 	 */
-	constructor(editor) {
-		super(editor);
+  constructor(editor) {
+    super(editor);
 
-		/**
+    /**
 		 * The number of characters in the editor.
 		 *
 		 * @observable
 		 * @readonly
 		 * @member {Number} module:counter/index~Counter#characters
 		 */
-		this.set('characters', 0);
+    this.set('characters', 0);
 
-		/**
+    /**
 		 * The number of double byte characters in the editor.
 		 * @observable
 		 * @readonly
 		 * @member {Number} module:counter/index~Counter#doubles
 		 */
-		this.set('doubles', 0);
+    this.set('doubles', 0);
 
-		// Don't wait for the #update event to set the value of the properties but obtain it right away.
-		// This way, accessing the properties directly returns precise numbers, e.g. for validation, etc.
-		// If not accessed directly, the properties will be refreshed upon #update anyway.
-		Object.defineProperties(this, {
-			characters: {
-				get() {
-					return (this.characters = this._getCharacters().length);
-				},
-			},
-			doubles: {
-				get() {
-					return (this.doubles = this._getDoubles());
-				},
-			},
-		});
+    // Don't wait for the #update event to set the value of the properties but obtain it right away.
+    // This way, accessing the properties directly returns precise numbers, e.g. for validation, etc.
+    // If not accessed directly, the properties will be refreshed upon #update anyway.
+    Object.defineProperties(this, {
+      characters: {
+        get() {
+          return (this.characters = this._getCharacters().length);
+        },
+      },
+      doubles: {
+        get() {
+          return (this.doubles = this._getDoubles());
+        },
+      },
+    });
 
-		/**
+    /**
 		 * The label used to display the characters value in the {@link #CounterContainer output container}.
 		 *
 		 * @observable
@@ -90,9 +92,9 @@ class Counter extends Plugin {
 		 * @readonly
 		 * @member {String} module:counter/index~Counter#_charactersLabel
 		 */
-		this.set('_charactersLabel');
+    this.set('_charactersLabel');
 
-		/**
+    /**
 		 * The label used to display the double bytes characters value in the {@link #CounterContainer output container}
 		 *
 		 * @observable
@@ -100,65 +102,65 @@ class Counter extends Plugin {
 		 * @readonly
 		 * @member {String} module:counter/index~Counter#_doublesLabel
 		 */
-		this.set('_doublesLabel');
+    this.set('_doublesLabel');
 
-		/**
+    /**
 		 * The configuration of this plugin.
 		 *
 		 * @private
 		 * @type {Object}
 		 */
-		this._config = editor.config.get('counter') || {};
+    this._config = editor.config.get('counter') || {};
 
-		/**
+    /**
 		 * The reference to a {@link module:ui/view~View view object} that contains the self-updating HTML container.
 		 *
 		 * @private
 		 * @readonly
 		 * @type {module:ui/view~View}
 		 */
-		this._outputView = undefined;
-	}
+    this._outputView = undefined;
+  }
 
-	/**
+  /**
 	 * @inheritDoc
 	 */
-	static get pluginName() {
-		return 'Counter';
-	}
+  static get pluginName() {
+    return 'Counter';
+  }
 
-	/**
+  /**
 	 * @inheritDoc
 	 */
-	init() {
-		const editor = this.editor;
+  init() {
+    const editor = this.editor;
 
-		editor.model.document.on('change:data', throttle(this._refreshStats.bind(this), 250));
+    editor.model.document.on('change:data', throttle(this._refreshStats.bind(this), 250));
 
-		if (typeof this._config.onUpdate == 'function') {
-			this.on('update', (evt, data) => {
-				this._config.onUpdate(data);
-			});
-		}
+    if (typeof this._config.onUpdate === 'function') {
+      this.on('update', (evt, data) => {
+        this._config.onUpdate(data);
+      });
+    }
 
-		if (isElement(this._config.container)) {
-			this._config.container.appendChild(this.CounterContainer);
-		}
-	}
+    if (isElement(this._config.container)) {
+      this._config.container.appendChild(this.CounterContainer);
+    }
+  }
 
-	/**
+  /**
 	 * @inheritDoc
 	 */
-	destroy() {
-		if (this._outputView) {
-			this._outputView.element.remove();
-			this._outputView.destroy();
-		}
+  destroy() {
+    if (this._outputView) {
+      this._outputView.element.remove();
+      this._outputView.destroy();
+    }
 
-		super.destroy();
-	}
+    super.destroy();
+  }
 
-	/**
+  /**
 	 * Creates a self-updating HTML element. Repeated executions return the same element.
 	 * The returned element has the following HTML structure:
 	 *
@@ -169,116 +171,116 @@ class Counter extends Plugin {
 	 *
 	 * @type {HTMLElement}
 	 */
-	get CounterContainer() {
-		const editor = this.editor;
-		const displayCharacters = editor.config.get('counter.characters');
-		const displayDoubles = editor.config.get('counter.doubles');
-		const bind = Template.bind(this, this);
-		const children = [];
+  get CounterContainer() {
+    const editor = this.editor;
+    const displayCharacters = editor.config.get('counter.characters');
+    const displayDoubles = editor.config.get('counter.doubles');
+    const bind = Template.bind(this, this);
+    const children = [];
 
-		if (!this._outputView) {
-			this._outputView = new View();
+    if (!this._outputView) {
+      this._outputView = new View();
 
-			if (displayCharacters || displayCharacters === undefined) {
-				this.bind('_charactersLabel').to(this, 'characters', (words) => {
-					return `字符数: ${words}`;
-				});
+      if (displayCharacters || displayCharacters === undefined) {
+        this.bind('_charactersLabel').to(this, 'characters', (words) => {
+          return `字符数: ${words}`;
+        });
 
-				children.push({
-					tag: 'div',
-					children: [
-						{
-							text: [bind.to('_charactersLabel')],
-						},
-					],
-					attributes: {
-						class: 'ck-counter__characters',
-					},
-				});
-			}
+        children.push({
+          tag: 'div',
+          children: [
+            {
+              text: [ bind.to('_charactersLabel') ],
+            },
+          ],
+          attributes: {
+            class: 'ck-counter__characters',
+          },
+        });
+      }
 
-			if (displayDoubles || displayDoubles === undefined) {
-				this.bind('_doublesLabel').to(this, 'doubles', (words) => {
-					return `双字节字符数: ${words}`;
-				});
+      if (displayDoubles || displayDoubles === undefined) {
+        this.bind('_doublesLabel').to(this, 'doubles', (words) => {
+          return `双字节字符数: ${words}`;
+        });
 
-				children.push({
-					tag: 'div',
-					children: [
-						{
-							text: [bind.to('_doublesLabel')],
-						},
-					],
-					attributes: {
-						class: 'ck-counter__doubles',
-					},
-				});
-			}
+        children.push({
+          tag: 'div',
+          children: [
+            {
+              text: [ bind.to('_doublesLabel') ],
+            },
+          ],
+          attributes: {
+            class: 'ck-counter__doubles',
+          },
+        });
+      }
 
-			this._outputView.setTemplate({
-				tag: 'div',
-				attributes: {
-					class: ['ck', 'ck-counter'],
-				},
-				children,
-			});
+      this._outputView.setTemplate({
+        tag: 'div',
+        attributes: {
+          class: [ 'ck', 'ck-counter' ],
+        },
+        children,
+      });
 
-			this._outputView.render();
-		}
+      this._outputView.render();
+    }
 
-		return this._outputView.element;
-	}
+    return this._outputView.element;
+  }
 
-	/**
+  /**
 	 * Determines the plain text in the current editor's model.
 	 *
 	 * @private
 	 * @return {String}
 	 */
-	_getPlains() {
-		return modelElementToPlainText(this.editor.model.document.getRoot());
-	}
+  _getPlains() {
+    return modelElementToPlainText(this.editor.model.document.getRoot());
+  }
 
-	/**
+  /**
 	 * Determines the number of characters in the current editor's model.
 	 *
 	 * @private
-	 * @returns {String}
+	 * @return {String}
 	 */
-	_getCharacters() {
-		return this._getPlains().replace(/\n/g, '');
-	}
+  _getCharacters() {
+    return this._getPlains().replace(/\n/g, '');
+  }
 
-	/**
+  /**
 	 * Determines the number of double bytes characters in the current editor's model
 	 *
 	 * @private
 	 * @return {Number}
 	 */
-	_getDoubles() {
-		const plains = this._getCharacters();
-		// eslint-disable-next-line no-control-regex
-		const reg = new RegExp('[^\x00-\xff]', 'g');
-		const res = plains.match(reg);
-		return plains.length + (res ? res.length : 0);
-	}
+  _getDoubles() {
+    const plains = this._getCharacters();
+    // eslint-disable-next-line no-control-regex
+    const reg = new RegExp('[^\x00-\xff]', 'g');
+    const res = plains.match(reg);
+    return plains.length + (res ? res.length : 0);
+  }
 
-	/**
+  /**
 	 * Determines the number of words and characters in the current editor's model and assigns it to {@link #characters} and {@link #words}.
 	 * It also fires the {@link #event:update}.
 	 *
 	 * @private
 	 * @fires update
 	 */
-	_refreshStats() {
-		const characters = (this.characters = this._getCharacters().length);
-		const doubles = (this.doubles = this._getDoubles());
+  _refreshStats() {
+    const characters = (this.characters = this._getCharacters().length);
+    const doubles = (this.doubles = this._getDoubles());
 
-		this.fire('update', {
-			characters,
-			doubles,
-		});
-	}
+    this.fire('update', {
+      characters,
+      doubles,
+    });
+  }
 }
 
 export { modelElementToPlainText, Counter };
