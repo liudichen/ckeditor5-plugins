@@ -1,5 +1,5 @@
 /**
- * @module indent-first-line/command
+ * @module outline-line/command
  */
 import { Command } from '@ckeditor/ckeditor5-core';
 
