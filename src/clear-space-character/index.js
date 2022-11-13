@@ -14,7 +14,7 @@ import { ClearSpaceCharacterEditing } from './editing';
 
 const ATTRIBUTE = 'clearSpaceCharacter';
 
-/** 清除空格字符，注意会清除掉特意的空格，Plugin:ClearSpaceCharacter, toolbar:clearSpaceCharacter */
+/** 清除多余空格字符，注意会清除掉特意的空格，Plugin:ClearSpaceCharacter, toolbar:clearSpaceCharacter */
 export default class ClearSpaceCharacter extends Plugin {
   /**
 	 * @inheritDoc

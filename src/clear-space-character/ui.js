@@ -24,8 +24,7 @@ export class ClearSpaceCharacterUI extends Plugin {
       const buttonView = new ButtonView(locale);
 
       buttonView.set({
-        // label: '清除多余空格和空行',
-        label: '清除选择块的空格（注意:会清除有意的空格）',
+        label: '清除多余空格和空行',
         icon: trimIcon,
         tooltip: true,
       });

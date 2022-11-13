@@ -13,7 +13,7 @@
 ```text
 ├── src
 │   ├── clear-empty-paragraph   清除空行
-│   ├── clear-space-character   清除多余空格(开头、结尾和中间连续的空格)
+│   ├── clear-space-character   清除多余空格和空行(开头、结尾的空格，中间连续的空格只保留1个)
 │   ├── convert-full-half       全角、半角标点符号相互转换
 │   ├── figure-attributes       为figure包裹的元素添加自定义属性
 │   ├── format-painter          格式刷(将选择的区块的样式应用于其他区块)
