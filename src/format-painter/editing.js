@@ -3,19 +3,19 @@ import { ATTRIBUTE } from './index';
 import { FormatPainterCommand } from './command';
 
 export class FormatPainterEditing extends Plugin {
-	/**
+  /**
 	 * @inheritDoc
-	 * @return {string}
+	 * @return {string} formatPainterEditing
 	 */
-	static get pluginName() {
-		return 'formatPainterEditing';
-	}
+  static get pluginName() {
+    return 'formatPainterEditing';
+  }
 
-	/**
+  /**
 	 * @inheritDoc
 	 */
-	init() {
-		const editor = this.editor;
-		editor.commands.add(ATTRIBUTE, new FormatPainterCommand(editor));
-	}
+  init() {
+    const editor = this.editor;
+    editor.commands.add(ATTRIBUTE, new FormatPainterCommand(editor));
+  }
 }
