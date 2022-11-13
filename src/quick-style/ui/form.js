@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/check-tag-names */
 import { View, ButtonView, SwitchButtonView, ViewCollection, FocusCycler, submitHandler } from '@ckeditor/ckeditor5-ui';
 import { KeystrokeHandler, FocusTracker } from '@ckeditor/ckeditor5-utils';
 
@@ -13,8 +14,8 @@ export const fields = [
   // { label: '清除超链接', name: 'clearLinks' },
   { label: '首行缩进', name: 'indentFirstLine' },
   { label: '清除超链接', name: 'clearLinks' },
-  { label: '清除空行', name: 'clearEmpty' },
-  { label: '清除多余空格', name: 'clearSpace' },
+  { label: '清除空段落', name: 'clearEmptyParagraph' },
+  { label: '清除多余空格', name: 'clearSpaceCharacter' },
   { label: '换行转断行', name: 'softBreakToEnter' },
 ];
 
@@ -26,8 +27,8 @@ function generateObserver() {
 /**
  * check fields when the quickStyle executes
  *
- * @param obj
- * @return {boolean}
+ * @param {object} obj Object
+ * @return {boolean} check fields when the quickStyle executes
  */
 function checkFields(obj) {
   return !!obj && Object.keys(obj).every((key) => fields.some((f) => f.name === key));
@@ -209,11 +210,11 @@ export class QuickStyleForm extends View {
   /**
 	 * Creates a button view
 	 *
-	 * @param label {String}
-	 * @param icon {String}
-	 * @param className {String}
-	 * @param eventName {String|null|undefined}
-	 * @return {ButtonView}
+	 * @param {string} label label
+	 * @param {string} icon icon
+	 * @param {string} className classname
+	 * @param {string|null|undefined} eventName eventname
+	 * @return {ButtonView} buttonView
 	 * @private
 	 */
   _createButton(label, icon, className, eventName) {

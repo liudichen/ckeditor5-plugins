@@ -6,18 +6,18 @@ import { QuickStyleCommand } from './command';
 import { ATTRIBUTE } from './index';
 
 export class QuickStyleEditing extends Plugin {
-	/**
+  /**
 	 * @inheritDoc
 	 */
-	static get pluginName() {
-		return 'QuickStyleEditing';
-	}
+  static get pluginName() {
+    return 'QuickStyleEditing';
+  }
 
-	/**
+  /**
 	 * @inheritDoc
 	 */
-	init() {
-		const editor = this.editor;
-		editor.commands.add(ATTRIBUTE, new QuickStyleCommand(editor));
-	}
+  init() {
+    const editor = this.editor;
+    editor.commands.add(ATTRIBUTE, new QuickStyleCommand(editor));
+  }
 }
