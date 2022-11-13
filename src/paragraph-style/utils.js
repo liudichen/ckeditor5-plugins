@@ -1,5 +1,5 @@
 export function isSupported(option) {
-  return option === 'Default' || /^\d(\d)?$/gm.test(String(option));
+  return option === 'Default' || /^(\d)|(\d?\.\d{1,2})$/gm.test(String(option));
 }
 
 export function normalizeOptions(configuredOptions, unit, prop) {
@@ -40,7 +40,7 @@ function optionDefinition(option, unit, prop) {
     return { model: undefined, title: prop === 'line-height' ? '默认行高' : '默认间距' };
   }
 
-  const size = parseFloat(option);
+  const size = +option;
 
   if (isNaN(size)) {
     return;
