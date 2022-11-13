@@ -5,43 +5,43 @@
  */
 import { Plugin } from '@ckeditor/ckeditor5-core';
 
-class FigureAttributes extends Plugin {
-	/**
+/** A plugin that converts custom attributes for elements that are wrapped in <figure> in the view.
+ * */
+export default class FigureAttributes extends Plugin {
+  /**
 	 * @inheritDoc
-	 *
-	 * @param editor
 	 */
-	constructor(editor) {
-		super(editor);
+  constructor(editor) {
+    super(editor);
 
-		this.options = this.editor.config.get('figureAttributes') ?? {};
-	}
+    this.options = this.editor.config.get('figureAttributes') ?? {};
+  }
 
-	/**
+  /**
 	 * Sets the conversion up and extends the table & image features schema.
 	 * <br>
 	 *
 	 * **Note:** `Schema extending must be done in the "afterInit()" call because plugins define their schema in "init()".`
 	 */
-	afterInit() {
-		const plugins = this.editor.plugins;
-		const { table, image } = this.options;
+  afterInit() {
+    const plugins = this.editor.plugins;
+    const { table, image } = this.options;
 
-		if (!!table && plugins.has('Table') && this._executable(table)) {
-			this._setupConversion('table', 'table', table);
-		}
+    if (!!table && plugins.has('Table') && this._executable(table)) {
+      this._setupConversion('table', 'table', table);
+    }
 
-		if (image && this._executable(image)) {
-			if (plugins.has('ImageBlock')) {
-				this._setupConversion('img', 'imageBlock', image);
-			}
-			if (plugins.has('ImageInline')) {
-				this._setupConversion('img', 'imageInline', image);
-			}
-		}
-	}
+    if (image && this._executable(image)) {
+      if (plugins.has('ImageBlock')) {
+        this._setupConversion('img', 'imageBlock', image);
+      }
+      if (plugins.has('ImageInline')) {
+        this._setupConversion('img', 'imageInline', image);
+      }
+    }
+  }
 
-	/**
+  /**
 	 *
 	 * Sets up a conversion for a custom attribute on the view elements contained inside a <figure>.
 	 *
@@ -49,69 +49,82 @@ class FigureAttributes extends Plugin {
 	 * - Adds proper schema rules.
 	 * - Adds an upcast converter.
 	 * - Adds a downcast converter.
+	 * @param {string} viewElName viewElName
+	 * @param {string} modelElName modelElName
+	 * @param {string} viewAttribute viewAttribute
 	 */
-	_setupConversion(viewElName, modelElName, viewAttribute) {
-		const editor = this.editor;
+  _setupConversion(viewElName, modelElName, viewAttribute) {
+    const editor = this.editor;
 
-		// Extends the schema to store an attribute in the model.
-		const modelAttribute = `custom-${viewAttribute}`;
-		editor.model.schema.extend(modelElName, { allowAttributes: [modelAttribute] });
+    // Extends the schema to store an attribute in the model.
+    const modelAttribute = `custom-${viewAttribute}`;
+    editor.model.schema.extend(modelElName, { allowAttributes: [ modelAttribute ] });
 
-		editor.conversion.for('upcast').add(this._upcast(viewElName, viewAttribute, modelAttribute));
-		editor.conversion.for('downcast').add(this._downcast(modelElName, viewElName, viewAttribute, modelAttribute));
-	}
+    editor.conversion.for('upcast').add(this._upcast(viewElName, viewAttribute, modelAttribute));
+    editor.conversion.for('downcast').add(this._downcast(modelElName, viewElName, viewAttribute, modelAttribute));
+  }
 
-	/**
+  /**
 	 * Returns the custom attribute upcast converter.
+	 * @param {string} viewElName viewElName
+	 * @param {string} viewAttribute viewAttribute
+	 * @param {string} modelAttribute modelAttribute
 	 */
-	_upcast(viewElName, viewAttribute, modelAttribute) {
-		return (dispatcher) => {
-			dispatcher.on(`element:${viewElName}`, (evt, data, conversionApi) => {
-				const viewItem = data.viewItem;
-				const modelRange = data.modelRange;
-				const modelElement = modelRange && modelRange.start.nodeAfter;
+  _upcast(viewElName, viewAttribute, modelAttribute) {
+    return (dispatcher) => {
+      dispatcher.on(`element:${viewElName}`, (evt, data, conversionApi) => {
+        const viewItem = data.viewItem;
+        const modelRange = data.modelRange;
+        const modelElement = modelRange && modelRange.start.nodeAfter;
 
-				if (!modelElement) {
-					return;
-				}
+        if (!modelElement) {
+          return;
+        }
 
-				conversionApi.writer.setAttribute(modelAttribute, viewItem.getAttribute(viewAttribute) ?? '', modelElement);
-			});
-		};
-	}
+        conversionApi.writer.setAttribute(modelAttribute, viewItem.getAttribute(viewAttribute) ?? '', modelElement);
+      });
+    };
+  }
 
-	/**
+  /**
 	 * Returns the custom attribute downcast converter.
+	 * @param {string} modelElName modelElName
+	 * @param {string} viewElName viewElName
+	 * @param {string} viewAttr viewAttr
+	 * @param {string} modelAttr  modelAttr
 	 */
-	_downcast(modelElName, viewElName, viewAttr, modelAttr) {
-		return (dispatcher) =>
-			dispatcher.on(`insert:${modelElName}`, (evt, data, conversionApi) => {
-				const modelElement = data.item;
-				const viewFigure = conversionApi.mapper.toViewElement(modelElement);
-				const viewElement = this._findViewChild(viewFigure, viewElName, conversionApi);
+  _downcast(modelElName, viewElName, viewAttr, modelAttr) {
+    return (dispatcher) =>
+      dispatcher.on(`insert:${modelElName}`, (evt, data, conversionApi) => {
+        const modelElement = data.item;
+        const viewFigure = conversionApi.mapper.toViewElement(modelElement);
+        const viewElement = this._findViewChild(viewFigure, viewElName, conversionApi);
 
-				if (!viewElement) {
-					return;
-				}
+        if (!viewElement) {
+          return;
+        }
 
-				conversionApi.writer.setAttribute(viewAttr, modelElement.getAttribute(modelAttr) ?? '', viewElement);
-			});
-	}
+        conversionApi.writer.setAttribute(viewAttr, modelElement.getAttribute(modelAttr) ?? '', viewElement);
+      });
+  }
 
-	/**
+  /**
 	 * Helper method that searches for a given view element in all children of the model element.
+	 * @param {string} viewElement viewElement
+	 * @param {string} viewElName viewElName
+	 * @param {object} conversionApi conversionApi
 	 */
-	_findViewChild(viewElement, viewElName, conversionApi) {
-		const viewChildren = Array.from(conversionApi.writer.createRangeIn(viewElement).getItems());
-		return viewChildren.find((item) => item.is('element', viewElName));
-	}
+  _findViewChild(viewElement, viewElName, conversionApi) {
+    const viewChildren = Array.from(conversionApi.writer.createRangeIn(viewElement).getItems());
+    return viewChildren.find((item) => item.is('element', viewElName));
+  }
 
-	_executable(attributes) {
-		if (typeof attributes === 'string' && attributes.length) {
-			return true;
-		}
-		return attributes instanceof Array && attributes.length;
-	}
+  _executable(attributes) {
+    if (typeof attributes === 'string' && attributes.length) {
+      return true;
+    }
+    return attributes instanceof Array && attributes.length;
+  }
 }
 
 export { FigureAttributes };
