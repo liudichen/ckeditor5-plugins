@@ -22,9 +22,9 @@
 │   ├── paragraph-style
 │       ├── line-height         行高(行距)控制
 │       ├── paragraph-spacing   段落间距(实际为段前距)
-│   ├── quick-style         快速排版
-│   ├── simple-adapter      重写官方的SimpleUploadAdapter，支持文件字段自定义
-│   ├── soft-break-to-enter 软换行转硬换行
+│   ├── quick-style             快速排版
+│   ├── simple-adapter          重写官方的SimpleUploadAdapter，支持文件字段自定义
+│   ├── soft-break-to-enter     软换行转硬换行
 ```
 
 ## Preview 呈现结果
