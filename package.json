@@ -1,6 +1,6 @@
 {
   "name": "@iimm/ckeditor5-plugins",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "custom ckeditor5 plugins (eg: indent first line, custom format, ad so on...)",
   "scripts": {
     "lint": "eslint --quiet '**/*.js' --fix",
