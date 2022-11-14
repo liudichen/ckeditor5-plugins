@@ -6,10 +6,10 @@
 [![NPM version](https://img.shields.io/npm/v/@iimm/ckeditor5-plugins.svg?style=flat)](https://npmjs.org/package/@iimm/ckeditor5-plugins)
 [![NPM downloads](http://img.shields.io/npm/dm/@iimm/ckeditor5-plugins.svg?style=flat)](https://npmjs.org/package/@iimm/ckeditor5-plugins)
 
-> **fork from <https://github.com/letsbug/ckeditor5-plugins>，修改了depends和目录结构,修改了部分插件的名称**
+> **fork from <https://github.com/letsbug/ckeditor5-plugins>，修改了depends和目录结构,修改了部分插件的名称、图标、tooltip、默认配置项等**
 
 ## features 包含功能
- 
+
 ```text
 ├── src
 │   ├── clear-empty-paragraph   清除空行
